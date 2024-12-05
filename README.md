@@ -78,7 +78,7 @@ The **Simon Memory Game** is a fun and engaging project implemented on an **STM3
 
 ### Schematic Diagram
 
-**[`Click Here`](SimranGahra/Classical-Simon-Says-Game/SimonSchematic.pdf)**:
+**[`Click Here`](./SimonSchematic.pdf)**:
 
 ### Connections
 
@@ -106,14 +106,14 @@ The **Simon Memory Game** is a fun and engaging project implemented on an **STM3
 
 ### Core Files
 
-1. **[`main.c`](SimranGahra/Classical-Simon-Says-Game/Code/main.c)**:
+1. **[`main.c`](./Code/main.c)**:
    - Initializes the system and manages game logic.
    - Implements a cyclic sequence loop and handles player interactions.
 
-2. **[`main.h`](SimranGahra/Classical-Simon-Says-Game/Code/main.h)**:
+2. **[`main.h`](./Code/main.h)**:
    - Contains global declarations and function prototypes.
 
-3. **[`functions.c`](SimranGahra/Classical-Simon-Says-Game/Code/functions.c)**:
+3. **[`functions.c`](./Code/functions.c)**:
    - Implements core game functionalities:
      - LED sequences.
      - Player input validation.

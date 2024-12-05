@@ -1,4 +1,4 @@
-# Simon Says Memory Game
+# Classical Simon Says Game
 
 ## Project Overview
 

@@ -139,6 +139,11 @@ The **Simon Memory Game** is an interactive project implemented on an **STM32F10
      - Randomized sequence generation.
      - Winning and failure sequences.
 
+### STM32 Peripheral Header
+
+The project uses the **stm32f10x.h** file included in the STM32 Standard Peripheral Library, which provides all necessary macros and function declarations for configuring the GPIO ports and handling hardware peripherals. Ensure that the **STM32 Standard Peripheral Library** is included in your project folder or IDE environment or use the copy provided in this repository (**[`stm32f10x.h`](./Code/stm32f10x.h)**).
+
+
 ### Key Functions
 
 - **`setup()`**:

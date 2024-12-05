@@ -2,17 +2,23 @@
 
 ## Project Overview
 
-The **Simon Memory Game** is a fun and engaging project implemented on an **STM32F103RB** microcontroller. It challenges players to memorize and replicate sequences of LED flashes using buttons. As the game progresses, the sequences become longer and more challenging, testing the player’s memory and reflexes. This project is an excellent example of interactive embedded systems programming.
+The **Simon Memory Game** is an interactive project implemented on an **STM32F103RB** microcontroller. It challenges players to memorize and replicate sequences of LED flashes using buttons. As the game progresses, the sequences become longer and more challenging, testing the player’s memory and reflexes. This project showcases the use of GPIO programming, interactive feedback, and real-time delays in embedded systems.
 
 ---
 
 ## Features
 
-- **Interactive Gameplay**: Players match LED sequences using buttons.
+- **Interactive Gameplay**: Players match LED sequences using buttons with immediate feedback on button presses.
 - **Dynamic Difficulty**: Sequence length increases with each round.
+- **Randomized LED Sequences**:
+  - The game generates a random LED sequence at the start of each playthrough, ensuring unpredictability.
+- **Feedback Mechanism**:
+  - LEDs light up when a button is pressed, confirming user input.
 - **Winning and Failure Indications**:
   - **Victory Sequence**: All LEDs flash, followed by a binary display of the winning round.
   - **Failure Sequence**: LEDs indicate the last completed round in binary.
+- **Delays for Clarity**:
+  - Delays after button presses and between rounds to ensure smooth gameplay and clear transitions.
 - **Customizable Hardware**: Easily modify LED/button mappings and sequences.
 
 ---
@@ -24,7 +30,7 @@ The **Simon Memory Game** is a fun and engaging project implemented on an **STM3
    - Press any button to initiate **Round 1**.
 
 2. **Sequence Display**:
-   - LEDs flash in a specific pattern.
+   - A random LED sequence is generated for each game and displayed to the player.
    - Memorize the sequence.
 
 3. **Player Input**:
@@ -35,23 +41,35 @@ The **Simon Memory Game** is a fun and engaging project implemented on an **STM3
      - **Green Button → LED3 (PA4)**
      - **Blue Button → LED4 (PB0)**
 
-4. **Round Progression**:
-   - Successfully completing a round adds an additional step to the sequence.
+4. **Feedback During Input**:
+   - LEDs light up to indicate the button pressed by the player.
+   - Feedback is cleared before the next input step.
 
-5. **Game End**:
+5. **Round Progression**:
+   - Successfully completing a round adds an additional step to the sequence.
+   - A delay between rounds provides clarity that a new sequence will begin.
+
+6. **Game End**:
    - **Winning**: Complete all 10 rounds to trigger the **Victory Sequence**.
    - **Failure**: An incorrect button press or timeout triggers the **Failure Sequence**:
      - LEDs blink to indicate failure, then display the last completed round in binary.
 
-6. **Restart**:
+7. **Restart**:
    - Press any button to restart after winning or losing.
 
 ---
 
 ## LED Feedback
 
+### Feedback During Input:
+- LEDs light up immediately to confirm button presses:
+  - **Black Button (PB4)** → LED1 (PA0)
+  - **Red Button (PB6)** → LED2 (PA1)
+  - **Green Button (PB8)** → LED3 (PA4)
+  - **Blue Button (PB9)** → LED4 (PB0)
+
 ### Failure Sequence:
-- The LEDs blink to indicate failure, followed by a binary representation of the last completed round:
+- LEDs blink to indicate failure, followed by a binary representation of the last completed round:
   - Example: If you completed **Round 3**, the LEDs show **0011**:
     - **LED1 (Bit 0)**: ON
     - **LED2 (Bit 1)**: ON
@@ -117,6 +135,8 @@ The **Simon Memory Game** is a fun and engaging project implemented on an **STM3
    - Implements core game functionalities:
      - LED sequences.
      - Player input validation.
+     - Feedback for button presses.
+     - Randomized sequence generation.
      - Winning and failure sequences.
 
 ### Key Functions
@@ -127,11 +147,17 @@ The **Simon Memory Game** is a fun and engaging project implemented on an **STM3
 - **`cyclone_led()`**:
   Displays the startup sequence (Cylon Eye Scanner effect).
 
+- **`genranseq()`**:
+  Creates a random LED sequence for the game.
+
+- **`ranto4()`**:
+  Generates a random number between 0 and 3 for LED selection.
+
 - **`play_seq(int round)`**:
   Displays the LED sequence for the current round.
 
 - **`play_round(int round)`**:
-  Validates the player's input against the displayed sequence.
+  Validates the player's input against the displayed sequence, with feedback and delays.
 
 - **`failure(int lastround)`**:
   Handles game-over logic, indicating the last completed round.
@@ -176,8 +202,7 @@ The **Simon Memory Game** is a fun and engaging project implemented on an **STM3
 
 ## Credits
 
-- **Developer**: Simran Gahra
+- **Developer**: Simran Gahra  
 - **Guidance**: University of Regina ENSE Labs
 
 ---
-

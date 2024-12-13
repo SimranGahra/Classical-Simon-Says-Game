@@ -59,32 +59,6 @@ The **Simon Memory Game** is an interactive project implemented on an **STM32F10
 
 ---
 
-## LED Feedback
-
-### Feedback During Input:
-- LEDs light up immediately to confirm button presses:
-  - **Black Button (PB4)** → LED1 (PA0)
-  - **Red Button (PB6)** → LED2 (PA1)
-  - **Green Button (PB8)** → LED3 (PA4)
-  - **Blue Button (PB9)** → LED4 (PB0)
-
-### Failure Sequence:
-- LEDs blink to indicate failure, followed by a binary representation of the last completed round:
-  - Example: If you completed **Round 3**, the LEDs show **0011**:
-    - **LED1 (Bit 0)**: ON
-    - **LED2 (Bit 1)**: ON
-    - **LED3 (Bit 2)**: OFF
-    - **LED4 (Bit 3)**: OFF
-
-### Winning Sequence:
-- Upon successfully completing **Round 10**, the LEDs blink together and then show **1010**:
-  - **LED1 (Bit 0)**: OFF
-  - **LED2 (Bit 1)**: ON
-  - **LED3 (Bit 2)**: OFF
-  - **LED4 (Bit 3)**: ON
-
----
-
 ## Hardware Configuration
 
 ### Components
@@ -96,7 +70,9 @@ The **Simon Memory Game** is an interactive project implemented on an **STM32F10
 
 ### Schematic Diagram
 
-**[`Click Here`](./SimonSchematic.pdf)**:
+The hardware setup for the Simon Memory Game is detailed in the provided **SimonSchematic.pdf**. This schematic outlines the connections and configurations required to build the circuit, including LED and button wiring.
+
+**[`Click Here to View the Schematic`](./SimonSchematic.pdf)**
 
 ### Connections
 
@@ -120,18 +96,28 @@ The **Simon Memory Game** is an interactive project implemented on an **STM32F10
 
 ---
 
+## Configuring Inputs and Outputs
+
+The GPIO ports and pins for the LEDs and buttons must be configured as follows:
+
+- **LEDs**: Configure as output pins to drive the LEDs. Use current-limiting resistors to prevent damage.
+- **Buttons**: Configure as input pins with pull-up or pull-down resistors to ensure stable input signals.
+- **Clock Configuration**: Ensure the correct clock setup for the GPIO module to manage real-time delays effectively.
+
+---
+
 ## Code Details
 
 ### Core Files
 
-1. **[`main.c`](./Code/main.c)**:
+1. **[`main.c`](./Files/main.c)**:
    - Initializes the system and manages game logic.
    - Implements a cyclic sequence loop and handles player interactions.
 
-2. **[`main.h`](./Code/main.h)**:
+2. **[`main.h`](./Files/main.h)**:
    - Contains global declarations and function prototypes.
 
-3. **[`functions.c`](./Code/functions.c)**:
+3. **[`functions.c`](./Files/functions.c)**:
    - Implements core game functionalities:
      - LED sequences.
      - Player input validation.
@@ -141,34 +127,7 @@ The **Simon Memory Game** is an interactive project implemented on an **STM32F10
 
 ### STM32 Peripheral Header
 
-The project uses the **stm32f10x.h** file included in the STM32 Standard Peripheral Library, which provides all necessary macros and function declarations for configuring the GPIO ports and handling hardware peripherals. Ensure that the **STM32 Standard Peripheral Library** is included in your project folder or IDE environment or use the copy provided in this repository (**[`stm32f10x.h`](./Code/stm32f10x.h)**).
-
-
-### Key Functions
-
-- **`setup()`**:
-  Configures GPIO pins for LEDs and buttons.
-
-- **`cyclone_led()`**:
-  Displays the startup sequence (Cylon Eye Scanner effect).
-
-- **`genranseq()`**:
-  Creates a random LED sequence for the game.
-
-- **`ranto4()`**:
-  Generates a random number between 0 and 3 for LED selection.
-
-- **`play_seq(int round)`**:
-  Displays the LED sequence for the current round.
-
-- **`play_round(int round)`**:
-  Validates the player's input against the displayed sequence, with feedback and delays.
-
-- **`failure(int lastround)`**:
-  Handles game-over logic, indicating the last completed round.
-
-- **`game_won()`**:
-  Executes the victory sequence.
+The project uses the **stm32f10x.h** file included in the STM32 Standard Peripheral Library, which provides all necessary macros and function declarations for configuring the GPIO ports and handling hardware peripherals. Ensure that the **STM32 Standard Peripheral Library** is included in your project folder or IDE environment or use the copy provided in this repository (**[`stm32f10x.h`](./Files/stm32f10x.h)**).
 
 ---
 
@@ -205,9 +164,31 @@ The project uses the **stm32f10x.h** file included in the STM32 Standard Periphe
 
 ---
 
-## Credits
+## Additional Notes
 
-- **Developer**: Simran Gahra  
-- **Guidance**: University of Regina ENSE Labs
+- **Troubleshooting**:
+  - If the LEDs or buttons do not respond as expected, double-check all connections against the schematic.
+  - Ensure the STM32 board is correctly powered and the GPIO ports are properly configured.
+- **Learning Opportunity**:
+  - This project offers hands-on experience with GPIO programming, real-time feedback, and embedded system design.
+  - It provides a strong foundation for understanding the interaction between hardware and software in microcontroller-based systems.
 
 ---
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE). Feel free to use, modify, and distribute the code under the terms of the license.
+
+---
+
+## Credits & Acknowledgments
+
+- **Developer**: Simran Gahra  
+- Project developed as part of the **ENSE 352 Architecture Design Lab**.
+- Special thanks to the **University of Regina ENSE Labs** for guidance and resources.
+
+---
+
+By combining interactive gameplay with real-time embedded system concepts, the Simon Memory Game serves as a practical and educational project for enthusiasts and students alike.
+
+ 
